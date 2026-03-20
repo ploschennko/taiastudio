@@ -437,7 +437,7 @@ def create_app() -> web.Application:
 
     app.router.add_post(CFG.crypto_webhook_path, cryptopay_webhook)
 
-    dp.startup.register(lambda: on_startup(app))
+    app.on_startup.append(on_startup)
     dp.shutdown.register(lambda: on_shutdown(app))
     setup_application(app, dp, bot=bot)
 
