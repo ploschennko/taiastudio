@@ -324,7 +324,6 @@ async def on_success_payment(message: Message) -> None:
     p = message.successful_payment.invoice_payload
     product = p.split(":")[0]
     
-    # Исправлены синтаксические ошибки: добавлены \n вместо разрыва строк
     if product == "base":
         await message.answer("Оплата успішна ✅\nДоступ буде виданий менеджером.", reply_markup=kb_manager())
     elif product == "pro":
@@ -384,7 +383,6 @@ async def cryptopay_webhook(request: web.Request) -> web.Response:
             logging.info(f"Успешная транзакция -> ID: {invoice_id} | Plan: {plan} | User: {user_id}")
 
         try:
-            # Исправлены переносы строк
             if plan == "BASE":
                 await bot.send_message(user_id, "Оплата успішна ⚡️\nДоступ буде виданий менеджером.", reply_markup=kb_manager())
             elif plan == "PRO":
