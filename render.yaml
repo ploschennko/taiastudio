@@ -1,55 +1,19 @@
 services:
   - type: web
-    name: tg-sales-funnel-bot
-    runtime: python
-    plan: starter
-
+    name: taia-system-bot
+    env: python
     buildCommand: pip install -r requirements.txt
     startCommand: python main.py
-
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
       - key: BOT_TOKEN
         sync: false
-
-      # Telegram webhook
-      - key: TG_WEBHOOK_PATH
-        value: "/tg/webhook"
       - key: TG_WEBHOOK_SECRET
-        sync: false
-
-      # Оплата: STARS | CRYPTOPAY | LINK
+        generateValue: true
       - key: PAY_PROVIDER
-        value: "STARS"
-
-      # Stars pricing (XTR)
-      - key: BASE_STARS
-        value: "399"
-      - key: PRO_STARS
-        value: "799"
-      - key: MENTOR_STARS
-        value: "2000"
-
-      # Менеджер / саппорт
-      - key: MANAGER_URL
-        value: "https://t.me/taiastudio"
-      - key: PAYSUPPORT_TEXT
-        value: "Питання по оплаті або доступу: @velvettaya / @taiastudio"
-
-      # Crypto Pay (опционально)
+        value: STARS
       - key: CRYPTO_TOKEN
         sync: false
-      - key: CRYPTO_WEBHOOK_PATH
-        sync: false
-
-      # Link fallback (опционально)
-      - key: BASE_PAY_URL
-        sync: false
-      - key: PRO_PAY_URL
-        sync: false
-      - key: MENTOR_PAY_URL
-        sync: false
-
-      # Если используете кастомный домен — задайте вручную.
-      # Иначе код возьмёт RENDER_EXTERNAL_URL автоматически.
-      - key: PUBLIC_BASE_URL
-        sync: false
+      - key: MANAGER_URL
+        value: https://t.me/taiastudio
