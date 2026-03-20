@@ -12,6 +12,7 @@ from aiohttp import web
 
 from aiogram import Bot, Dispatcher, F, Router
 from aiogram.enums import ChatAction, ParseMode
+from aiogram.client.default import DefaultBotProperties
 from aiogram.filters import Command, CommandStart
 from aiogram.types import (
     CallbackQuery,
@@ -108,7 +109,8 @@ if not CFG.crypto_webhook_path.startswith("/"):
 # Инициализация инфраструктуры
 # =========================
 
-bot = Bot(token=CFG.bot_token, parse_mode=ParseMode.HTML)
+# ИСПРАВЛЕНИЕ: Использование DefaultBotProperties для новых версий aiogram
+bot = Bot(token=CFG.bot_token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 dp = Dispatcher()
 router = Router()
 dp.include_router(router)
